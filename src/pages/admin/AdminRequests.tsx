@@ -38,7 +38,8 @@ export default function AdminRequests() {
         .select('*, users(full_name)')
         .order('created_at', { ascending: false })
         if (filter !== 'all') query = query.eq('status', filter)
-        const { data } = await query
+        const { data, error } = await query
+        console.log('data:', data, 'error:', error)
         if (data) setRequests(data as Request[])
         setLoading(false)
     }
