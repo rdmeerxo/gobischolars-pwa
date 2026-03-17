@@ -31,6 +31,7 @@ export default function AdminRequests() {
   }
 
   useEffect(() => { 
+    alert('useEffect running, filter: ' + filter)
     const load = async () => {
       setLoading(true)
       let query = supabase
