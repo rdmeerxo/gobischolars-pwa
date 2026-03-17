@@ -32,19 +32,19 @@ export default function AdminRequests() {
 
   useEffect(() => { 
     const load = async () => {
-        setLoading(true)
-        let query = supabase
+      setLoading(true)
+      let query = supabase
         .from('requests')
-        .select('*, users(full_name)')
+        .select('*')
         .order('created_at', { ascending: false })
-        if (filter !== 'all') query = query.eq('status', filter)
-        const { data, error } = await query
-        console.log('data:', data, 'error:', error)
-        if (data) setRequests(data as Request[])
-        setLoading(false)
+      if (filter !== 'all') query = query.eq('status', filter)
+      const { data, error } = await query
+      console.log('data:', data, 'error:', error)
+      if (data) setRequests(data as unknown as Request[])
+      setLoading(false)
     }
     load()
- }, [filter])
+  }, [filter])
 
   const updateStatus = async (id: string, status: 'approved' | 'denied') => {
     setUpdating(id)
